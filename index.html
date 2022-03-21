@@ -29,6 +29,9 @@
         background: url("background.svg"), linear-gradient(#0f0f0f, #0f0f0f);
         background-repeat: repeat;
       }
+      #loadingFill.error {
+        filter: sepia(100%) saturate(200%) brightness(70%) hue-rotate(330deg);
+      }
     </style>
   </head>
   <body style="text-align: center">
@@ -63,7 +66,7 @@
         loadingFill.style.height = prg * 100 + "%";
       }).then((unityInstance) => {
         setTimeout(() => { loadingBar.style.display = "none" }, 2000);
-      });
+      }).catch((error) => { loadingFill.classList.add("error") });
     </script>
   </body>
 </html>
