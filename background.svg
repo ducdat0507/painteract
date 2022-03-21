@@ -1,0 +1,14 @@
+<svg width="500" height="500" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+    <rect fill="black" width="500" height="500"></rect>
+    <filter id="reflection">
+        <feTurbulence baseFrequency="0.9998">
+            <animate attributeName="seed" values="0;360000" dur="30s" repeatCount="indefinite"/>
+        </feTurbulence>
+        <feColorMatrix type="matrix"
+            values=".05 0 0 0 0
+                    .05 0 0 0 0
+                    .05 0 0 0 0
+                    0 0 0 0 1" />
+    </filter>
+    <rect fill="#111111" width="5000" height="5000" filter="url(#reflection)" transform="translate(-2500 -2500)" />
+</svg>

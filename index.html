@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Painteract</title>
+    <style>
+      body {
+        background: black;
+        margin: 0;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+      #loadingBar {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+      #loadingFill {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: url("background.svg"), linear-gradient(#0f0f0f, #0f0f0f);
+        background-repeat: repeat;
+      }
+    </style>
+  </head>
+  <body style="text-align: center">
+
+    <canvas id="canvas" style="width: 100%; height: 100%; background: black"></canvas>
+    <div id="loadingBar">
+      <div id="loadingFill"></div>
+    </div>
+
+    <script src="Build/Build.loader.js"></script>
+
+    <script>
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        // Mobile device style: fill the whole browser client area with the game canvas:
+        var meta = document.createElement('meta');
+        meta.name = 'viewport';
+        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+        document.getElementsByTagName('head')[0].appendChild(meta);
+      }
+
+      createUnityInstance(canvas, {
+        dataUrl: "Build/Build.data.gz",
+        frameworkUrl: "Build/Build.framework.js.gz",
+        codeUrl: "Build/Build.wasm.gz",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "DefaultCompany",
+        productName: "Painteract",
+        productVersion: "0.1",
+        // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
+        // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
+      }, prg => {
+        loadingFill.style.height = prg * 100 + "%";
+      }).then((unityInstance) => {
+        setTimeout(() => { loadingBar.style.display = "none" }, 2000);
+      });
+    </script>
+  </body>
+</html>
