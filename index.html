@@ -47,6 +47,9 @@
         font-weight: 100;
         font-size: 3em;
       }
+      #loadingText.error {
+        font-size: 1em;
+      }
     </style>
   </head>
   <body style="text-align: center">
@@ -82,8 +85,14 @@
         loadingFill.style.height = prg * 100 + "%";
         loadingText.textContent = (prg * 100).toFixed(2) + "%";
       }).then((unityInstance) => {
-        setTimeout(() => { loadingBar.style.display = "none" }, 2000);
-      }).catch((error) => { loadingFill.classList.add("error") });
+        setTimeout(() => { 
+          loadingBar.style.display = "none" 
+        }, 2000);
+      }).catch((error) => { 
+        loadingFill.classList.add("error");
+        loadingText.classList.add("error");
+        loadingText.textContent = error;
+    });
     </script>
   </body>
 </html>
